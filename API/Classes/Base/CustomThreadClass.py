@@ -11,6 +11,6 @@ class CustomThread(Thread):
         if self._target is not None:
             self._return = self._target(*self._args, **self._kwargs)
 
-    def join(self):
-        Thread.join(self)
+    def join(self, timeout=None):
+        Thread.join(self, timeout=timeout)
         return self._return
