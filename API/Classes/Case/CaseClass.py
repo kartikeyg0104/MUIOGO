@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from Classes.Base import Config
 from Classes.Base.FileClass import File
 
@@ -28,7 +29,7 @@ class Case:
                     Rdata[rt['id']][sc['ScenarioId']].append(chunk)
 
             # File.writeFile( Rdata, self.Rpath)
-            File.writeFile( Rdata, self.jsonPath['R'])
+            return Rdata
         except(IOError):
             raise IOError
 
@@ -48,7 +49,7 @@ class Case:
                         else:
                             chunk[year] = None
                     RYdata[ry['id']][sc['ScenarioId']].append(chunk)
-            File.writeFile( RYdata, self.jsonPath['RY'])
+            return RYdata
         except(IOError):
             raise IOError
 
@@ -69,7 +70,7 @@ class Case:
                             chunk[tech['TechId']] = None
                     RTdata[rt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RTdata, self.jsonPath['RT'])
+            return RTdata
         except(IOError):
             raise IOError
 
@@ -90,7 +91,7 @@ class Case:
                             chunk[emi['EmisId']] = None
                     REdata[rt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( REdata, self.jsonPath['RE'])
+            return REdata
         except(IOError):
             raise IOError
 
@@ -111,7 +112,7 @@ class Case:
                             chunk[stg['StgId']] = None
                     RSdata[rs['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RSdata, self.jsonPath['RS'])
+            return RSdata
         except(IOError):
             raise IOError
         
@@ -136,7 +137,7 @@ class Case:
                                 chunk[year] = None
                         RYCndata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYCndata, self.jsonPath['RYCn'])
+            return RYCndata
         except(IOError):
             raise IOError
 
@@ -160,7 +161,7 @@ class Case:
                                 chunk[year] = None
                         RYTsdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTsdata, self.jsonPath['RYTs'])
+            return RYTsdata
         except(IOError):
             raise IOError
 
@@ -184,7 +185,7 @@ class Case:
                                 chunk[year] = None
                         RYDtbdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYDtbdata, self.jsonPath['RYDtb'])
+            return RYDtbdata
         except(IOError):
             raise IOError
 
@@ -212,7 +213,7 @@ class Case:
                                     chunk[year] = None
                             RYSeDtsdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYSeDtsdata, self.jsonPath['RYSeDt'])
+            return RYSeDtsdata
         except(IOError):
             raise IOError
            
@@ -237,7 +238,7 @@ class Case:
                                 chunk[year] = None
                         RYTdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTdata, self.jsonPath['RYT'])
+            return RYTdata
         except(IOError):
             raise IOError
 
@@ -262,7 +263,7 @@ class Case:
                                 chunk[year] = None
                         RYSdata[rys['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYSdata, self.jsonPath['RYS'])
+            return RYSdata
         except(IOError):
             raise IOError
         
@@ -290,7 +291,7 @@ class Case:
                                         chunk[year] = None
                                 RYTCndata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTCndata, self.jsonPath['RYTCn'])
+            return RYTCndata
         except(IOError):
             raise IOError
 
@@ -318,7 +319,7 @@ class Case:
                                     chunk[year] = None
                             RYTMdata[rytm['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTMdata, self.jsonPath['RYTM'])
+            return RYTMdata
         except(IOError):
             raise IOError
 
@@ -343,7 +344,7 @@ class Case:
                                 chunk[year] = None
                         RYCdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYCdata, self.jsonPath['RYC'])
+            return RYCdata
         except(IOError):
             raise IOError
 
@@ -368,7 +369,7 @@ class Case:
                                 chunk[year] = None
                         RYEdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYEdata, self.jsonPath['RYE'])
+            return RYEdata
         except(IOError):
             raise IOError
 
@@ -396,7 +397,7 @@ class Case:
                                         chunk[year] = None 
                                 RYTCdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTCdata, self.jsonPath['RYTC'])
+            return RYTCdata
         except(IOError):
             raise IOError
 
@@ -427,7 +428,7 @@ class Case:
                                             chunk[year] = None
                                     RYTCMdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTCMdata, self.jsonPath['RYTCM'])
+            return RYTCMdata
         except(IOError):
             raise IOError
 
@@ -458,7 +459,7 @@ class Case:
                                         chunk[year] = None
                                 RYTSMdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTSMdata, self.jsonPath['RYTSM'])
+            return RYTSMdata
         except(IOError):
             raise IOError
 
@@ -487,7 +488,7 @@ class Case:
                                     chunk['Value'] = None
                                 RTSMdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RTSMdata, self.jsonPath['RTSM'])
+            return RTSMdata
         except(IOError):
             raise IOError
            
@@ -515,7 +516,7 @@ class Case:
                                         chunk[year] = None
                                 RYTEdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTEdata, self.jsonPath['RYTE'])
+            return RYTEdata
         except(IOError):
             raise IOError
 
@@ -549,7 +550,7 @@ class Case:
                                             chunk[year] = None
                                     RYTEMdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTEMdata, self.jsonPath['RYTEM'])
+            return RYTEMdata
         except(IOError):
             raise IOError
 
@@ -577,7 +578,7 @@ class Case:
                                     chunk[year] = None
                             RYTTsdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYTTsdata, self.jsonPath['RYTTs'])
+            return RYTTsdata
         except(IOError):
             raise IOError
 
@@ -605,17 +606,30 @@ class Case:
                                     chunk[year] = None
                             RYCTsdata[ryt['id']][sc['ScenarioId']].append(chunk)
 
-            File.writeFile( RYCTsdata, self.jsonPath['RYCTs'])
+            return RYCTsdata
         except(IOError):
             raise IOError
 
     def createCase(self):
+        # Phase 1: Aggregate — build all parameter data in memory
+        buffer = {}
+        for group, array in self.PARAMETERS.items():
+            if array:
+                func_name = Config.DEFAULT_F[group]
+                func = getattr(self, func_name)
+                buffer[group] = func()
+
+        # Phase 2: Commit — flush all data to disk in a single batch
+        written = []
         try:
-            for group, array in self.PARAMETERS.items():
-                if array:
-                    func_name = Config.DEFAULT_F[group]
-                    func = getattr(self,func_name) 
-                    func() 
-            
-        except(IOError):
+            for group, data in buffer.items():
+                File.writeFile(data, self.jsonPath[group])
+                written.append(self.jsonPath[group])
+        except (IOError, OSError):
+            # Phase 3: Rollback — remove partially-written files
+            for path in written:
+                try:
+                    os.remove(path)
+                except OSError:
+                    pass
             raise IOError
