@@ -972,6 +972,12 @@ class DataFile(Osemosys):
 
             for caserunname in os.listdir( self.resultsPath):
                 caserunname_path = os.path.join(self.resultsPath, caserunname)
+                if not os.path.isdir(caserunname_path):
+                    try:
+                        os.remove(caserunname_path)
+                    except Exception as e:
+                        print(f"Greška pri brisanju {caserunname_path}: {e}")
+                    continue
                 for carerunData in os.listdir( caserunname_path):
                     file_path = os.path.join(caserunname_path, carerunData)
                     try:
