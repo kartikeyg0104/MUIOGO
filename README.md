@@ -12,7 +12,7 @@ By linking sectoral resource systems (climate, land, energy, and water) with a d
 
 The project will create a standardized interface and shared execution system linking the two models, enabling integrated analyses that are not currently possible. The enhanced OG–CLEWS framework will be deployed in more than 10 countries, supporting evidence-based policymaking and helping countries advance toward their Sustainable Development Goals through 2030.
 
-See the [Project Background & Vision](https://github.com/EAPD-DRB/MUIOGO/wiki/Project-Background-and-Vision)
+See the [Project Background & Vision](https://github.com/EAPD-DRB/MUIOGO/wiki/Project-Background-and-Vision) and the programme's [Timeline](https://github.com/EAPD-DRB/MUIOGO/wiki/Timeline) for more information.
 
 MUIOGO is the integration project to bring the purely Python-based OG-Core model into MUIO, the GUI for OSeMOSYS (CLEWS).
 
@@ -53,6 +53,21 @@ Use [MUIO-Mac](https://github.com/SeaCelo/MUIO-Mac) as the current macOS-capable
 
 One of the core goals of MUIOGO is to become platform independent so separate
 platform-specific ports are no longer required.
+
+## Demo data
+
+MUIOGO now includes the CLEWs demo-data archive in-repo:
+
+- `assets/demo-data/CLEWs.Demo.zip`
+- SHA-256: `facf4bda703f67b3c8b8697fea19d7d49be72bc2029fc05a68c61fd12ba7edde`
+
+To install demo data locally:
+
+1. Unzip `assets/demo-data/CLEWs.Demo.zip` into `WebAPP/DataStorage/`
+2. Confirm this folder exists: `WebAPP/DataStorage/CLEWs Demo/`
+
+This mirrors the current MUIO-Mac demo-data flow and gives contributors a
+single source for test data in this repository.
 
 ## What is in this repository
 
