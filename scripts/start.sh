@@ -22,6 +22,7 @@ PYTHON="$VENV_DIR/bin/python"
 HOST="127.0.0.1"
 PORT="${PORT:-5002}"
 URL="http://${HOST}:${PORT}/"
+HEALTH_URL="http://${HOST}:${PORT}/health"
 TIMEOUT_SECONDS=30
 
 if [ ! -x "$PYTHON" ]; then
@@ -45,7 +46,7 @@ cleanup() {
 trap cleanup INT TERM
 
 elapsed=0
-while ! curl -fsS "$URL" >/dev/null 2>&1; do
+while ! curl -fsS "$HEALTH_URL" >/dev/null 2>&1; do
     if ! kill -0 "$SERVER_PID" >/dev/null 2>&1; then
         echo "ERROR: MUIOGO server exited before becoming ready."
         exit 1
@@ -65,5 +66,5 @@ else
     xdg-open "$URL" >/dev/null 2>&1 || true
 fi
 
-echo "Browser opened. Press CTRL+C here to stop MUIOGO."
-wait "$SERVER_PID"
+echo "Browser opened. Press CTRL+C here to stop MUIOGO, or use the Quit button in the sidebar."
+wait "$SERVER_PID" || true

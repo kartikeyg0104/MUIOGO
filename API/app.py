@@ -1,6 +1,9 @@
 #import sys
 from pathlib import Path
 import os
+import sys
+import signal
+import threading
 
 from flask import Flask, jsonify, request, session, render_template
 from flask_cors import CORS
@@ -113,6 +116,20 @@ def setSession():
         return jsonify(response), 200
     except KeyError:
         return jsonify('No selected parameters!'), 404
+
+
+#graceful shutdown and health check for local mode only
+if Config.HEROKU_DEPLOY == 0:
+    @app.route("/health", methods=['GET'])
+    def health():
+        return jsonify({"status": "ok"}), 200
+
+    @app.route("/shutdown", methods=['POST'])
+    def shutdown():
+        def kill_server():
+            os.kill(os.getpid(), signal.SIGINT)
+        threading.Timer(0.5, kill_server).start()
+        return jsonify({"message": "Server shutting down..."}), 200
 
 
 if __name__ == '__main__':

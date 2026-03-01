@@ -18,9 +18,9 @@ The United Nations Department of Economic and Social Affairs (DESA) has applied 
 
 By linking sectoral resource systems (climate, land, energy, and water) with a dynamic macroeconomic model, the unified framework will allow policymakers to assess both the physical feasibility and economy-wide impacts of climate and development policies in a transparent, reproducible, and low-cost way.
 
-The project will create a standardized interface and shared execution system linking the two models, enabling integrated analyses that are not currently possible. The enhanced OG-CLEWS framework will be deployed in more than 10 countries, supporting evidence-based policymaking and helping countries advance toward their Sustainable Development Goals through 2030.
+The project will create a standardized interface and shared execution system linking the two models, enabling integrated analyses that are not currently possible. The enhanced OG–CLEWS framework will be deployed in more than 10 countries, supporting evidence-based policymaking and helping countries advance toward their Sustainable Development Goals through 2030.
 
-See the [Project Background & Vision](https://github.com/EAPD-DRB/MUIOGO/wiki/Project-Background-and-Vision) and the programme's [Timeline](https://github.com/EAPD-DRB/MUIOGO/wiki/Timeline) for more information.
+See the [Project Background & Vision](https://github.com/EAPD-DRB/MUIOGO/wiki/Project-Background-and-Vision)
 
 MUIOGO is the integration project to bring the purely Python-based OG-Core model into MUIO, the GUI for OSeMOSYS (CLEWS).
 
@@ -28,43 +28,36 @@ For now, the app will run locally on a user's machine. In the future, the app ma
 
 At the moment, this repository starts from a direct copy baseline of MUIO. The goal of MUIOGO is to evolve that baseline into an integrated OG-CLEWS model that is maintainable and platform-independent.
 
-## Requirements
+If you are new to this repo, start with the current installation notes below.
 
-- Git:
-  - Install: [git-scm.com](https://git-scm.com/downloads)
-- Python 3.11:
-  - macOS (in Terminal): `brew install python@3.11`
-  - Windows (in PowerShell or Command Prompt): `winget install -e --id Python.Python.3.11`
-  - Installer downloads: [python.org macOS](https://www.python.org/downloads/macos/) / [python.org Windows](https://www.python.org/downloads/windows/)
-- GLPK and CBC solvers:
-  - Installed automatically by setup scripts (`./scripts/setup.sh` or `scripts\\setup.bat`)
+## Resources
 
-## Quick Start
+Beyond the purely technical aspects, it is important to get a basic understanding of what both models do:
+- MUIO: https://muio-modelling-user-interface-for-osemosys.readthedocs.io/
+- CLEWS/OSeMOSYS: https://osemosys.readthedocs.io/
+- OG-Core: https://pslmodels.github.io/OG-Core/content/theory/intro.html
 
-### macOS / Linux (in Terminal)
+Free online trainings are available here:
+- CLEWS: https://capacity.desa.un.org/article/introduction-clews
+- OG-Core: https://capacity.desa.un.org/article/mastering-og-core-model-theory-technical-applications-and-policy-use-cases
 
-```bash
-./scripts/setup.sh
-./scripts/start.sh
-```
+## Current installation status
 
-### Windows (in PowerShell or Command Prompt)
+### Windows
 
-```bat
-scripts\setup.bat
-scripts\start.bat
-```
+MUIO is currently distributed primarily as a Windows desktop installer.
 
-For setup options, use the "--help" flag:
-- macOS / Linux: `./scripts/setup.sh --help`
-- Windows: `scripts\setup.bat --help`
+1. Download the latest `.exe` installer from [here](https://github.com/OSeMOSYS/MUIO/releases)
+2. Move the `.exe` file to a folder where you have administrator permissions.
+3. Right-click `MUIO.exe` and select **Run as administrator**.
+4. Wait for installation to complete.
+5. Open the app from the Start Menu if it does not open automatically.
 
-## Demo Data
+### macOS
 
-- Archive: `assets/demo-data/CLEWs.Demo.zip`
-- SHA-256: `facf4bda703f67b3c8b8697fea19d7d49be72bc2029fc05a68c61fd12ba7edde`
+Use [MUIO-Mac](https://github.com/SeaCelo/MUIO-Mac) as the current macOS-capable path.
 
-Setup installs demo data by default.
+### Platform-independence goal
 
 To install demo data manually:
 
@@ -78,32 +71,61 @@ One of the core goals of MUIOGO is to become platform independent so separate pl
 - `API/`: Flask backend and run/data endpoints
 - `WebAPP/`: frontend assets served by Flask
 - `WebAPP/DataStorage/`: model inputs, case data, and run outputs
-- `docs/`: project and contributor documentation
+- `docs/`: user and model documentation sources
 
-## Contributing
+## Local mode features (macOS / Linux)
 
-Start with:
+When `HEROKU_DEPLOY = 0` (the default for local runs), two optional conveniences are available:
+
+- **Quit button** — a Quit entry appears in the sidebar. Clicking it shows a
+  confirmation dialog, then sends a `POST /shutdown` request that stops the
+  backend cleanly (SIGINT, same as `Ctrl-C`).
+- **`GET /health`** — returns `{"status": "ok"}` and is used by `scripts/start.sh`
+  to detect when the server is ready before opening the browser.
+
+These endpoints are not registered when `HEROKU_DEPLOY = 1`.
+
+## For new contributors
+
+Start here:
+
 - `CONTRIBUTING.md`
 - `docs/GSoC-2026.md`
 - `docs/ARCHITECTURE.md`
 - `docs/DOCS_POLICY.md`
 
-Contribution rule:
-- Create (or use) an issue first.
-- Work in a feature branch (for example `feature/<issue-number>-short-description`).
+Issue and PR templates:
 
-Templates:
 - `.github/ISSUE_TEMPLATE/`
 - `.github/pull_request_template.md`
 
-## Project Boundaries
+Contribution rule:
 
-This repository is downstream and separately managed from upstream:
+- Create (or use) an issue first.
+- Implement in a feature branch (for example:
+  `feature/<issue-number>-short-description`).
+
+## Important project boundaries
+
+This repository is downstream and separately managed from upstream `OSeMOSYS/MUIO`.
 
 - Upstream: `https://github.com/OSeMOSYS/MUIO`
 - This repo: `https://github.com/EAPD-DRB/MUIOGO`
 
-Delivery in MUIOGO cannot depend on upstream timelines or release cycles.
+Contributions upstream are welcome, but delivery in MUIOGO **cannot** depend on
+upstream timelines or releases.
+
+`MUIO-Mac` is a separate macOS port effort and can continue in parallel, but
+MUIOGO **cannot** depend on it for delivery decisions.
+
+## Wiki
+
+The wiki is currently used only for high-level background context:
+
+- [Project Background and Vision](https://github.com/EAPD-DRB/MUIOGO/wiki/Project-Background-and-Vision)
+
+Setup, architecture, contribution process, and governance docs are maintained in
+this repository.
 
 ## License
 

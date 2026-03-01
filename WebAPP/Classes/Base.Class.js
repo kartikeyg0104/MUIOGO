@@ -383,4 +383,19 @@ export class Base {
                 },
             });
     }
+
+    static quit() {
+        if (this.HEROKU === 1) return;
+        if (!confirm('Are you sure you want to quit MUIOGO?')) return;
+        $.ajax({
+            url: this.apiUrl() + "shutdown",
+            type: 'POST',
+            success: function () {
+                document.body.innerHTML = '<h2 style="text-align:center;margin-top:20%;">MUIOGO has been stopped. You can close this tab.</h2>';
+            },
+            error: function () {
+                document.body.innerHTML = '<h2 style="text-align:center;margin-top:20%;">MUIOGO has been stopped. You can close this tab.</h2>';
+            }
+        });
+    }
 }
